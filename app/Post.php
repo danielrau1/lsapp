@@ -13,4 +13,6 @@ class Post extends Model
     //Timestamps
     public $timestamps = true;
 
+
+
 }
