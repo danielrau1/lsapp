@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    // 1 to many: a user can have more thn 1 post
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
+
+
 }

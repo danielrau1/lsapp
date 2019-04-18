@@ -8,14 +8,16 @@
        {!!$post->body!!}
    </div>
     <hr>
-    <small>Written on {{$post->created_at}}</small>
+    <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
 <hr>
-    <a href="http://localhost/lsapp/public/posts/{{$post->id}}/edit">Edit</a>
+    @if(!Auth::guest())
+        @if(Auth::user()->id==$post->user_id)
+            <a href="http://localhost/lsapp/public/posts/{{$post->id}}/edit">Edit</a>
 
-    {{ Form::open(['action' => ['PostsController@destroy',$post->id], 'method'=>'POST']) }}
-        {{Form::hidden('_method','DELETE')}}
-        {{Form::submit('Delete')}}
-    {{ Form::close() }}
-
-
+            {{ Form::open(['action' => ['PostsController@destroy',$post->id], 'method'=>'POST']) }}
+                {{Form::hidden('_method','DELETE')}}
+                {{Form::submit('Delete')}}
+            {{ Form::close() }}
+        @endif
+    @endif
 @endsection
